@@ -1,0 +1,5 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">Comic App</string>
+    <string name="prev_text" tools:ignore="ExtraTranslation">Prev</string>
+    <string name="next_text" tools:ignore="ExtraTranslation">Next</string>
+</resources>
