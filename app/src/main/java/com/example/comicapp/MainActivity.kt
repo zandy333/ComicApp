@@ -8,38 +8,28 @@ import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
 
+    private val MINIMUM_PAGE_NUMBER: Int = 1 // Insert your minimum / lowest page number here
+    private val MAXIMUM_PAGE_NUMBER: Int = 4 // Insert your maximum / highest page number here
+    // assuming all the pages are numbered in the correct order
+
+    private var currentPage: Int = MINIMUM_PAGE_NUMBER
+
+    private lateinit var imgVw: ImageView
+    private lateinit var prevButtonTop: Button
+    private lateinit var nextButtonTop: Button
+    private lateinit var prevButtonBottom: Button
+    private lateinit var nextButtonBottom: Button
+
     override fun onCreate(savedInstanceState: Bundle?) {
-
-        val PACKAGE_NAME: String = applicationContext.packageName
-
-        val MINIMUM_PAGE_NUMBER: Int = 1 // Insert your minimum / lowest page number here
-        val MAXIMUM_PAGE_NUMBER: Int = 4 // Insert your maximum / highest page number here
-        // assuming all the pages are numbered in the correct order
-
-        var currentPage: Int = MINIMUM_PAGE_NUMBER
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        var imgVw: ImageView = findViewById<ImageView>(R.id.img_vw)
-        var prevButtonTop: Button = findViewById<Button>(R.id.prev_button_top)
-        var nextButtonTop: Button = findViewById<Button>(R.id.next_button_top)
-        var prevButtonBottom: Button = findViewById<Button>(R.id.prev_button_bottom)
-        var nextButtonBottom: Button = findViewById<Button>(R.id.next_button_bottom)
-
-        fun goToPreviousPage() {
-            var currentPageMinusOne = currentPage - 1
-            var imgId = resources.getIdentifier("$PACKAGE_NAME:drawable/pg$currentPageMinusOne", null, null)
-            imgVw.setImageBitmap(BitmapFactory.decodeResource(resources, imgId))
-            currentPage -= 1
-        }
-
-        fun goToNextPage() {
-            var currentPagePlusOne = currentPage + 1
-            var imgId = resources.getIdentifier("$PACKAGE_NAME:drawable/pg$currentPagePlusOne", null, null)
-            imgVw.setImageBitmap(BitmapFactory.decodeResource(resources, imgId))
-            currentPage += 1
-        }
+        imgVw = findViewById<ImageView>(R.id.img_vw)
+        prevButtonTop = findViewById<Button>(R.id.prev_button_top)
+        nextButtonTop = findViewById<Button>(R.id.next_button_top)
+        prevButtonBottom = findViewById<Button>(R.id.prev_button_bottom)
+        nextButtonBottom = findViewById<Button>(R.id.next_button_bottom)
 
         prevButtonTop.setOnClickListener {
             if (currentPage > MINIMUM_PAGE_NUMBER ) {
@@ -64,5 +54,19 @@ class MainActivity : AppCompatActivity() {
                 goToNextPage()
             }
         }
+    }
+
+    private fun goToPreviousPage() {
+        var currentPageMinusOne = currentPage - 1
+        var imgId = resources.getIdentifier(applicationContext.packageName+":drawable/pg$currentPageMinusOne", "drawable", packageName)
+        imgVw.setImageBitmap(BitmapFactory.decodeResource(resources, imgId))
+        currentPage -= 1
+    }
+
+    private fun goToNextPage() {
+        var currentPagePlusOne = currentPage + 1
+        var imgId = resources.getIdentifier(applicationContext.packageName+":drawable/pg$currentPagePlusOne", "drawable", packageName)
+        imgVw.setImageBitmap(BitmapFactory.decodeResource(resources, imgId))
+        currentPage += 1
     }
 }
