@@ -38,15 +38,13 @@ class MainActivity : AppCompatActivity() {
 
         prevButtonTop.setOnClickListener {
             if (currentPage > MINIMUM_PAGE_NUMBER ) {
-                goToPreviousPage()
-                scrollVw.moveToTop()
+                goToPreviousPageAndScrollToTop()
             }
         }
 
         nextButtonTop.setOnClickListener {
             if (currentPage < MAXIMUM_PAGE_NUMBER ) {
-                goToNextPage()
-                scrollVw.moveToTop()
+                goToNextPageAndScrollToTop()
             }
         }
 
