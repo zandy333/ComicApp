@@ -10,12 +10,11 @@ import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
 
-    private val MINIMUM_PAGE_NUMBER: Int = 1 // Insert your minimum / lowest page number here
-    private val MAXIMUM_PAGE_NUMBER: Int = 4 // Insert your maximum / highest page number here
+    private val MINIMUM_PAGE_NUMBER: Int = 1 // Insert your minimum/lowest page number here
+    private val MAXIMUM_PAGE_NUMBER: Int = 6 // Insert your maximum/highest page number here
     // assuming all the pages are numbered in the correct order
 
-    private val imageFilenamePrefix = "pg" // Part of the image filename before the number
-
+    private val imageFilenamePrefix: String = "pg" // String part of the image filename before the number
     private var currentPage: Int = MINIMUM_PAGE_NUMBER
 
     private lateinit var imgVw: ImageView
@@ -53,15 +52,13 @@ class MainActivity : AppCompatActivity() {
 
         prevButtonBottom.setOnClickListener {
             if (currentPage > MINIMUM_PAGE_NUMBER ) {
-                goToPreviousPage()
-                scrollVw.moveToTop()
+                goToPreviousPageAndScrollToTop()
             }
         }
 
         nextButtonBottom.setOnClickListener {
             if (currentPage < MAXIMUM_PAGE_NUMBER ) {
-                goToNextPage()
-                scrollVw.moveToTop()
+                goToNextPageAndScrollToTop()
             }
         }
     }
@@ -84,5 +81,15 @@ class MainActivity : AppCompatActivity() {
         this.isFocusableInTouchMode = true
         this.fullScroll(View.FOCUS_UP)
         this.smoothScrollTo(0,0)
+    }
+
+    private fun goToPreviousPageAndScrollToTop() {
+        goToPreviousPage()
+        scrollVw.moveToTop()
+    }
+
+    private fun goToNextPageAndScrollToTop() {
+        goToNextPage()
+        scrollVw.moveToTop()
     }
 }
